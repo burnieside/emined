@@ -1,0 +1,50 @@
+<project name="Emined" default="war" basedir=".">
+    <description>
+       wiki as an extension of the mind 
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="war"  location="war"/>
+  <property name="lib"  location="${war}/lib"/>
+  <property name="sdk.dir"  location="${user.home}/appengine-java-sdk-1.7.3"/>
+  <property name="WEB-INF"  location="${war}/WEB-INF"/>
+  <property name="classes" location="${WEB-INF}/classes"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the classes directory structure used by compile -->
+    <mkdir dir="${war}"/>
+    <mkdir dir="${classes}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${classes}"/>
+  </target>
+
+  <target name="copyjars"
+      description="Copies the App Engine JARs to the WAR.">
+    <mkdir dir="war/WEB-INF/lib" />
+    <copy
+        todir="war/WEB-INF/lib"
+        flatten="true">
+      <fileset dir="${sdk.dir}/lib/user">
+        <include name="**/*.jar" />
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="war" depends="copyjars"
+        description="generate the distribution" >
+    <!-- Create the distribution directory -->
+    <mkdir dir="${classes}/META-INF"/>
+  </target>
+
+  <target name="clean"
+        description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${war}"/>
+  </target>
+</project>
