@@ -1,4 +1,4 @@
-<project name="Emined" default="war" basedir=".">
+<project name="emined-war" default="war" basedir=".">
     <description>
        wiki as an extension of the mind 
     </description>
@@ -45,6 +45,6 @@
   <target name="clean"
         description="clean up" >
     <!-- Delete the ${build} and ${dist} directory trees -->
-    <delete dir="${war}"/>
+    <delete dir="${classes}"/>
   </target>
 </project>

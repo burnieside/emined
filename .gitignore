@@ -1,3 +1,11 @@
+# vim files #
+*~
+*.swp
+
+# Ignore eclipse specific to workspace
+.metadata/**/*
+
+# class Files #
 *.class
 
 # Package Files #
